@@ -1,0 +1,3 @@
+10,curso,20.00
+11,material,30.50
+teste,teste,300.0

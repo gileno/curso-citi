@@ -51,4 +51,4 @@ class CategoryViewTestCase(TestCase):
         client = Client()
         category_url = reverse('catalog:category', args=['teste3'])
         response = client.get(category_url)
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 404)

@@ -1,0 +1,12 @@
+<div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+        <a href="{% url 'catalog:product' product.slug %}">
+            <img src="http://placehold.it/350x250" alt="" />
+        </a>
+        <div class="caption">
+            <h3>{{ product.name }}</h3>
+            {{ product.description|linebreaks }}
+            <p><a href="{% url 'catalog:product' product.slug %}" class="btn btn-success">Detalhes</a> <a href="#" class="btn btn-default">Button</a></p>
+        </div>
+    </div>
+</div>

@@ -1,13 +1,23 @@
 # coding=utf-8
 
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage
+from django.http import Http404
 
 from .models import Product, Category
 
 
 def index(request):
+    paginator = Paginator(Product.objects.all(), 3)
+    try:
+        page_number = int(request.GET.get('page', 1))
+        page_obj = paginator.page(page_number)
+    except (ValueError, EmptyPage):
+        raise Http404
     context = {
-        'products': Product.objects.all(),
+        'products': page_obj.object_list,
+        'page_obj': page_obj,
+        'paginator': paginator,
     }
     return render(request, 'catalog/index.html', context)
 

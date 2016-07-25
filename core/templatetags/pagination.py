@@ -19,3 +19,8 @@ def pagination(request, paginator, page_obj):
     else:
         context['getvars'] = ''
     return context
+
+
+@register.simple_tag
+def hello():
+    return 'Hello'

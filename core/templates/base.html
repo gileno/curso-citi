@@ -38,6 +38,11 @@
 				<a href="{% url 'contact' %}">Contato</a>
 			</li>
           </ul>
+		  <form class="navbar-form navbar-left" action="{% url 'catalog:index' %}">
+	        <div class="form-group">
+	          <input type="text" class="form-control" placeholder="Pesquisar" name="q" />
+	        </div>
+	      </form>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Minha Conta</a></li>
           </ul>

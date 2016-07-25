@@ -8,7 +8,12 @@ from .models import Product, Category
 
 
 def index(request):
-    paginator = Paginator(Product.objects.all(), 3)
+    q = request.GET.get('q', None)
+    if q:
+        products = Product.objects.filter(name__icontains=q)
+    else:
+        products = Product.objects.all()
+    paginator = Paginator(products, 3)
     try:
         page_number = int(request.GET.get('page', 1))
         page_obj = paginator.page(page_number)

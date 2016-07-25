@@ -8,7 +8,6 @@ class ViewsTestCase(TestCase):
 
     def setUp(self):
         self.url_index = reverse('index')
-        self.url_products = reverse('products')
         self.url_contact = reverse('contact')
         self.client = Client()
 
@@ -16,11 +15,6 @@ class ViewsTestCase(TestCase):
         response = self.client.get(self.url_index)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
-
-    def test_index_products(self):
-        response = self.client.get(self.url_products)
-        self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, 'products.html')
 
     def test_index_contact(self):
         response = self.client.get(self.url_contact)

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     # apps
     'core',
+    'accounts',
     'catalog',
 ]
 
@@ -138,6 +139,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 # auth
 LOGIN_REDIRECT_URL = 'index'
+AUTH_USER_MODEL = 'accounts.User'
 
 try:
     from .local_settings import *

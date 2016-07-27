@@ -138,7 +138,8 @@ ALLOWED_HOSTS = ['*']
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 # auth
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'accounts:index'
+LOGIN_URL = 'login'
 AUTH_USER_MODEL = 'accounts.User'
 
 try:

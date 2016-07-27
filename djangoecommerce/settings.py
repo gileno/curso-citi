@@ -141,6 +141,10 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 LOGIN_REDIRECT_URL = 'accounts:index'
 LOGIN_URL = 'login'
 AUTH_USER_MODEL = 'accounts.User'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.ModelBackend',    
+]
 
 # Messages
 from django.contrib.messages import constants as message_constants

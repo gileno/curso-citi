@@ -16,12 +16,23 @@ class Category(models.Model):
         return self.name
 
 
+class ProductManager(models.Manager):
+
+    def approved(self):
+        return self.filter(is_approved=True)
+
+
 class Product(models.Model):
 
     name = models.CharField('Nome', max_length=100)
     slug = models.SlugField('Slug')
     category = models.ForeignKey(Category, verbose_name='Categoria')
     description = models.TextField('Descrição', blank=True)
+    is_approved = models.BooleanField('Aprovado', default=True, blank=True)
+    price = models.DecimalField(
+        'Preço', default=0, decimal_places=2, max_digits=8
+    )
+    objects = ProductManager()
 
     class Meta:
         verbose_name = 'Produto'

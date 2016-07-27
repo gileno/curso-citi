@@ -8,11 +8,10 @@ from .models import Product, Category
 
 
 def index(request):
+    products = Product.objects.approved()
     q = request.GET.get('q', None)
     if q:
-        products = Product.objects.filter(name__icontains=q)
-    else:
-        products = Product.objects.all()
+        products = products.filter(name__icontains=q)
     paginator = Paginator(products, 3)
     try:
         page_number = int(request.GET.get('page', 1))
@@ -31,13 +30,13 @@ def category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     context = {
         'category': category,
-        'products': Product.objects.filter(category=category)
+        'products': Product.objects.approved().filter(category=category)
     }
     return render(request, 'catalog/category.html', context)
 
 
 def product(request, slug):
-    product = get_object_or_404(Product, slug=slug)
+    product = get_object_or_404(Product.objects.approved(), slug=slug)
     context = {
         'product': product
     }

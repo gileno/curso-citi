@@ -142,6 +142,16 @@ LOGIN_REDIRECT_URL = 'accounts:index'
 LOGIN_URL = 'login'
 AUTH_USER_MODEL = 'accounts.User'
 
+# Messages
+from django.contrib.messages import constants as message_constants
+MESSAGE_TAGS = {
+    message_constants.DEBUG: 'debug',
+    message_constants.INFO: 'info',
+    message_constants.SUCCESS: 'success',
+    message_constants.WARNING: 'warning',
+    message_constants.ERROR: 'danger',
+}
+
 try:
     from .local_settings import *
 except ImportError:

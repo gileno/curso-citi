@@ -9,6 +9,11 @@
 {% block container %}
 <div class="page-header">
     <h1>Fale conosco</h1>
+    {% for error in form.non_field_errors %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+    {% endfor %}
     <form class="form-horizontal" method="post" action="">
         {% csrf_token %}
         <fieldset>

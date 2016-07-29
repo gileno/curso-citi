@@ -55,6 +55,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.LogMiddleware',
 ]
 
 ROOT_URLCONF = 'djangoecommerce.urls'
@@ -143,7 +144,7 @@ LOGIN_URL = 'login'
 AUTH_USER_MODEL = 'accounts.User'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'accounts.backends.ModelBackend',    
+    'accounts.backends.ModelBackend',
 ]
 
 # Messages

@@ -3,8 +3,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.generic import FormView
+from django.core.urlresolvers import reverse
+from django.contrib.auth import update_session_auth_hash
 
-from .forms import RegisterUserForm, EditUserForm
+from .forms import RegisterUserForm, EditUserForm, PasswordChangeForm
 
 
 @login_required
@@ -34,3 +37,24 @@ def register(request):
         'form': form
     }
     return render(request, 'accounts/register.html', context)
+
+
+class PasswordChangeView(FormView):
+
+    template_name = 'accounts/password_change.html'
+    form_class = PasswordChangeForm
+
+    def get_success_url(self):
+        messages.success(self.request, 'Senha alterada com sucesso')
+        return reverse('accounts:index')
+
+    def get_form_kwargs(self):
+        kwargs = super(PasswordChangeView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        self.request.user.set_password(form.cleaned_data['new_password1'])
+        self.request.user.save()
+        update_session_auth_hash(self.request, self.request.user)
+        return super(PasswordChangeView, self).form_valid(form)
